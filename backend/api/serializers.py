@@ -126,15 +126,19 @@ class MenuCategorySerializer(serializers.ModelSerializer):
         read_only_fields = ['coffee_shop']
 
 class MenuItemSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False)
+
     class Meta:
         model = MenuItem
-        fields = ['id', 'name', 'description', 'price', 'category']
+        fields = ['id', 'name', 'description', 'price', 'category', 'image']
         read_only_fields = ['category']
 
 class PromoSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False)
+
     class Meta:
         model = Promo
-        fields = ['id', 'name', 'description', 'start_date', 'end_date', 'coffee_shop']
+        fields = ['id', 'name', 'description', 'start_date', 'end_date', 'coffee_shop', 'image']
         read_only_fields = ['coffee_shop']
 
 class RatingSerializer(serializers.ModelSerializer):

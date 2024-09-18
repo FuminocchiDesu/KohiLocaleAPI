@@ -9,6 +9,7 @@ from .models import User, CoffeeShop, BasicUser, CoffeeShopOwner, Rating, MenuIt
 from .serializers import (UserSerializer, CoffeeShopSerializer, BasicUserSerializer, CoffeeShopOwnerSerializer, RatingSerializer, 
                           UserLoginSerializer, UserRegistrationSerializer, MenuCategorySerializer, MenuItemSerializer, BugReportSerializer, 
                           PromoSerializer, CoffeeShopApplicationSerializer)
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = [permissions.AllowAny]
@@ -107,6 +108,7 @@ class MenuCategoryViewSet(viewsets.ModelViewSet):
 class MenuItemViewSet(viewsets.ModelViewSet):
     serializer_class = MenuItemSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    parser_classes = (MultiPartParser, FormParser)
 
     def get_queryset(self):
         return MenuItem.objects.filter(category__coffee_shop_id=self.kwargs['coffee_shop_pk'])
@@ -118,6 +120,7 @@ class MenuItemViewSet(viewsets.ModelViewSet):
 class PromoViewSet(viewsets.ModelViewSet):
     serializer_class = PromoSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    parser_classes = (MultiPartParser, FormParser)
 
     def get_queryset(self):
         return Promo.objects.filter(coffee_shop_id=self.kwargs['coffee_shop_pk'])
