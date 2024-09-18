@@ -6,8 +6,8 @@ from django.db.models import Avg
 from django.conf import settings
 
 class User(AbstractUser):
-    contact_number = models.CharField(max_length=20, blank=True)
-    bio = models.TextField(blank=True)
+    contact_number = models.CharField(max_length=20, blank=True, default='')
+    bio = models.TextField(blank=True, default='')
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default.png')
     is_owner = models.BooleanField(default=False)
 
